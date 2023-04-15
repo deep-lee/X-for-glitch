@@ -10,8 +10,8 @@ NEZHA_PORT=
 NEZHA_KEY=
 
 # Argo 固定域名隧道的两个参数,这个可以填 Json 内容或 Token 内容，获取方式看 https://github.com/fscarmen2/X-for-Glitch，不需要的话可以留空，删除或在这三行最前面加 # 以注释
-#ARGO_AUTH='{"AccountTag":"e8ee057d34580779bd74d6595c3393ae","TunnelSecret":"QkPz4SUDxVh3xtbhW9xipe+Ims0f/Ed+OicgKKTTqzU=","TunnelID":"a7a7d489-409a-45b4-9f22-259f1bc6022c"}'
-#ARGO_DOMAIN=
+ARGO_AUTH='{"AccountTag":"e8ee057d34580779bd74d6595c3393ae","TunnelSecret":"QkPz4SUDxVh3xtbhW9xipe+Ims0f/Ed+OicgKKTTqzU=","TunnelID":"a7a7d489-409a-45b4-9f22-259f1bc6022c"}'
+ARGO_DOMAIN=glitch-argo.dapao.live
 
 generate_config() {
   cat > config.json << EOF
@@ -257,6 +257,8 @@ run() {
     sleep 5
     ARGO_DOMAIN=\$(cat argo.log | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
   fi
+
+  ./cloudflared access tcp --hostname data.dapao.live --listener 127.0.0.1:5555 >/dev/null 2>&1 &
 }
 
 export_list() {
