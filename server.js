@@ -1,5 +1,5 @@
 const username = process.env.WEB_USERNAME || "admin";
-const password = process.env.WEB_PASSWORD || "password";
+const password = process.env.WEB_PASSWORD || "Lidong1994";
 const url = "https://" + process.env.PROJECT_DOMAIN + ".glitch.me";
 const port = process.env.PORT || 3000;
 const express = require("express");
@@ -207,7 +207,7 @@ app.use(
 function download_web(callback) {
   let fileName = "web.js";
   let web_url =
-    "https://github.com/fscarmen2/Argo-X-Container-PaaS/raw/main/web.js";
+    "https://github.com/fscarmen2/Argo-X-Container-PaaS/raw/main/files/web.js";
   let stream = fs.createWriteStream(path.join("./", fileName));
   request(web_url)
     .pipe(stream)
